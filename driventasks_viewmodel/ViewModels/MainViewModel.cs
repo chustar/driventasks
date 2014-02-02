@@ -1,4 +1,5 @@
-﻿using System;
+﻿using driventasks_viewmodel.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,11 +13,7 @@ namespace driventasks_viewmodel.ViewModels
     {
         public MainViewModel()
         {
-        }
-
-        public ObservableCollection<TaskGroup> TaskGroups
-        {
-            get; set;
+            TaskGroups = new ObservableCollection<TaskGroup>();
         }
 
         private bool _syncState;
@@ -32,6 +29,7 @@ namespace driventasks_viewmodel.ViewModels
                 NotifyPropertyChanged("SyncState");
             }
         }
+        public ObservableCollection<TaskGroup> TaskGroups { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void NotifyPropertyChanged(string propertyName)
