@@ -41,7 +41,7 @@ namespace driventasks.Models
         [JsonProperty(PropertyName = "deleted")]
         public DateTime DateDeleted { get; set; }
 
-        [JsonArray(Id = "ratings", ItemIsReference=true, AllowNullItems=false)] 
+        [JsonArray(Id = "ratings", AllowNullItems=false)] 
         public ObservableCollection<Rating> Ratings { get; set; }
 
         public bool Started
@@ -92,6 +92,12 @@ namespace driventasks.Models
             await Update();
         }
         
+        public async Task AddRating(int rating = 0)
+        {
+            Ratings.Add(new Rating(rating));
+            await Update();
+        }
+
         private IMobileServiceTable<TaskItem> tasksTable = DataStorage.DrivenTasks.GetTable<TaskItem>();
     }
 }

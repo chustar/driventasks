@@ -11,6 +11,6 @@ namespace driventasks.Data
     {
         public static MobileServiceClient DrivenTasks = new MobileServiceClient(
             "https://driventasks.azure-mobile.net/",
-            "");
+            "GbolKshDSmHlvsueciimAPwYxQZSLq51");
     }
 }

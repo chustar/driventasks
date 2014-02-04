@@ -37,6 +37,9 @@ namespace driventasks.Models
             }
         }
 
+        [JsonProperty(PropertyName = "created")]
+        public DateTime DateCreated {get; set; }
+
         public async Task Update()
         {
             await ratingsTable.UpdateAsync(this);
