@@ -41,7 +41,7 @@ namespace driventasks.Models
         [JsonProperty(PropertyName = "deleted")]
         public DateTime DateDeleted { get; set; }
 
-        [JsonArray(Id = "ratings", AllowNullItems=false)] 
+        [JsonProperty(PropertyName = "ratings", ItemIsReference = true)] 
         public ObservableCollection<Rating> Ratings { get; set; }
 
         public bool Started

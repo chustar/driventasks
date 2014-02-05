@@ -13,7 +13,7 @@ namespace driventasks.Models
     {
         public Rating(int rating = 0)
         {
-            Rating = rating;
+            RatingValue = rating;
             ratingsTable.InsertAsync(this);
         }
 
@@ -22,7 +22,7 @@ namespace driventasks.Models
         private int _rating = 0;
 
         [JsonProperty(PropertyName = "rating")] 
-        public int Rating
+        public int RatingValue
         {
             get
             {
