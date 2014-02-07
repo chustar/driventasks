@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace driventasks.Models
 {
-    class Rating
+    public class Rating
     {
         public Rating(int rating = 0)
         {

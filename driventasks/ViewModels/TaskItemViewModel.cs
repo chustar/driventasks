@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace driventasks.ViewModels
 {
-    class TaskItemViewModel
+    public class TaskItemViewModel
     {
         private Models.TaskItem taskItem;
 

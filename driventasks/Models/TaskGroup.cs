@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace driventasks.Models
 {
-    class TaskGroup
+    public class TaskGroup
     {
         public TaskGroup(TaskItem taskItem)
         {

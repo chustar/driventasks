@@ -8,6 +8,9 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using driventasks.Resources;
 
+using driventasks.ViewModels;
+using System.Windows.Data;
+
 namespace driventasks
 {
     public partial class App : Application
@@ -18,6 +21,7 @@ namespace driventasks
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
+        public static MainViewModel MainViewModel { get; private set; }
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -61,6 +65,8 @@ namespace driventasks
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            MainViewModel = new MainViewModel();
+            MainViewModel.LoadData();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -220,4 +226,21 @@ namespace driventasks
             }
         }
     }
+
+        /// <summary>
+        /// Value converter that translates true to <see cref="Visibility.Visible"/> and false to
+        /// <see cref="Visibility.Collapsed"/>.
+        /// </summary>
+        public sealed class BooleanToVisibilityConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                return (value is bool && (bool)value) ? Visibility.Visible : Visibility.Collapsed;
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                return value is Visibility && (Visibility)value == Visibility.Visible;
+            }
+        }
 }

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -41,13 +42,47 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
-            <TextBlock Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="DRIVEN TASKS" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
+            <phone:LongListSelector ItemsSource="{Binding TaskGroups}">
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <toolkit:ExpanderView ItemsSource="{Binding TaskItemsViewModel}">
+                                <toolkit:ExpanderView.ExpanderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel DataContext="{Binding PrimaryTaskItemViewModel}" Orientation="Horizontal">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Title}" />
+                                                <TextBlock Text="{Binding Description}" />
+                                            </StackPanel>
+                                            <Button Content="start task" Command="{Binding StartTaskCommand}" />
+                                            <Button Content="complete task" Command="{Binding CompleteTaskCommand}" />
+                                            <Button Content="delete task" Command="{Binding DeleteTaskCommand}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </toolkit:ExpanderView.ExpanderTemplate>
+                                <toolkit:ExpanderView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Title}" />
+                                    </DataTemplate>
+                                </toolkit:ExpanderView.ItemTemplate>
+                            </toolkit:ExpanderView>
+                        </StackPanel>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
+            <StackPanel>
+                <StackPanel Visibility="{Binding IsAddingNewTask, Converter={StaticResource VisibilityConverter}}">
+                    <TextBox Text="{Binding NewTaskTitle}" />
+                    <TextBox Text="{Binding NewTaskDescription}" />
+                    <Button Content="new task" Command="{Binding AddNewTaskCommand}" />
+                </StackPanel>
+                <Button Content="new task" Command="{Binding ToggleAddNewTaskCommand}" />
+            </StackPanel>
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

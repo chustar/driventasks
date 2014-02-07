@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace driventasks.Models
 {
-    class TaskItem
+    public class TaskItem
     {
-        TaskItem(string title, string description, Rating rating)
+        public TaskItem(string title, string description, Rating rating)
         {
             Ratings = new ObservableCollection<Rating>();
             Ratings.Add(rating);

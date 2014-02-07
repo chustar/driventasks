@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using driventasks.Resources;
 
+using driventasks.ViewModels;
 namespace driventasks
 {
     public partial class MainPage : PhoneApplicationPage
@@ -18,6 +19,7 @@ namespace driventasks
         {
             InitializeComponent();
 
+            DataContext = App.MainViewModel;
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
         }

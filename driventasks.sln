@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "driventasks.Phone", "driventasks\driventasks.Phone.csproj", "{289BD83B-7BA8-4B1C-A850-674533EBFF2A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "driventasks.Phone", "driventasks.Phone\driventasks.Phone.csproj", "{289BD83B-7BA8-4B1C-A850-674533EBFF2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "driventasks.Windows", "driventasks_windows\driventasks.Windows.csproj", "{FC4693F4-D4AF-4FE9-BD0C-1FC0BE827EB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "driventasks.Windows", "driventasks.Windows\driventasks.Windows.csproj", "{FC4693F4-D4AF-4FE9-BD0C-1FC0BE827EB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "driventasks", "driventasks_viewmodel\driventasks.csproj", "{D0363D62-1258-4374-A2AF-86D5B5403E66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "driventasks", "driventasks\driventasks.csproj", "{D0363D62-1258-4374-A2AF-86D5B5403E66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,15 +9,16 @@ using driventasks.Utilities;
 
 namespace driventasks.ViewModels
 {
-    class TaskGroupViewModel
+    public class TaskGroupViewModel
     {
         public TaskGroupViewModel(TaskGroup taskGroup)
         {
             this.taskGroup = taskGroup;
             LoadData();
         }
-       
-        public ObservableCollection<TaskItemViewModel> TaskItemViewModels {get; set; }
+
+        public TaskItemViewModel PrimaryTaskItemViewModel { get; set; }
+        public ObservableCollection<TaskItemViewModel> TaskItemViewModels { get; set; }
         
         private SimpleCommand _completeTaskGroupCommand;
         public SimpleCommand CompleteTaskGroupCommand
@@ -49,6 +50,7 @@ namespace driventasks.ViewModels
 
         public void LoadData()
         {
+            PrimaryTaskItemViewModel = new TaskItemViewModel(taskGroup.PrimaryTaskItem);
             foreach(TaskItem taskItem in taskGroup.TaskItems)
             {
                 TaskItemViewModels.Add(new TaskItemViewModel(taskItem));
