@@ -34,6 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\DataStorage.cs" />
+    <Compile Include="DesignViewModels\MainViewModel.cs" />
+    <Compile Include="DesignViewModels\TaskGroupViewModel.cs" />
+    <Compile Include="DesignViewModels\TaskItemViewModel.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Models\TaskItem.cs" />
     <Compile Include="Models\User.cs" />

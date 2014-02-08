@@ -7,7 +7,9 @@
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:design="clr-namespace:driventasks.DesignViewModels"
     mc:Ignorable="d"
+    d:DataContext="{Binding Source={d:DesignInstance Type=design:MainViewModel, IsDesignTimeCreatable=True}}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -51,7 +53,7 @@
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <toolkit:ExpanderView ItemsSource="{Binding TaskItemsViewModel}">
+                            <toolkit:ExpanderView ItemsSource="{Binding TaskItemsViewModel}" IsExpanded="True">
                                 <toolkit:ExpanderView.ExpanderTemplate>
                                     <DataTemplate>
                                         <StackPanel DataContext="{Binding PrimaryTaskItemViewModel}" Orientation="Horizontal">
@@ -59,9 +61,9 @@
                                                 <TextBlock Text="{Binding Title}" />
                                                 <TextBlock Text="{Binding Description}" />
                                             </StackPanel>
-                                            <Button Content="start task" Command="{Binding StartTaskCommand}" />
-                                            <Button Content="complete task" Command="{Binding CompleteTaskCommand}" />
-                                            <Button Content="delete task" Command="{Binding DeleteTaskCommand}" />
+                                            <Button Content="start" Command="{Binding StartTaskCommand}" />
+                                            <Button Content="finish" Command="{Binding CompleteTaskCommand}" />
+                                            <Button Content="delete" Command="{Binding DeleteTaskCommand}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </toolkit:ExpanderView.ExpanderTemplate>
@@ -79,7 +81,7 @@
                 <StackPanel Visibility="{Binding IsAddingNewTask, Converter={StaticResource VisibilityConverter}}">
                     <TextBox Text="{Binding NewTaskTitle}" />
                     <TextBox Text="{Binding NewTaskDescription}" />
-                    <Button Content="new task" Command="{Binding AddNewTaskCommand}" />
+                    <Button Content="save task" Command="{Binding AddNewTaskCommand}" />
                 </StackPanel>
                 <Button Content="new task" Command="{Binding ToggleAddNewTaskCommand}" />
             </StackPanel>

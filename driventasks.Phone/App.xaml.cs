@@ -227,11 +227,13 @@ namespace driventasks
         }
     }
 
+    namespace Converters
+    {
         /// <summary>
         /// Value converter that translates true to <see cref="Visibility.Visible"/> and false to
         /// <see cref="Visibility.Collapsed"/>.
         /// </summary>
-        public sealed class BooleanToVisibilityConverter : IValueConverter
+        public class BooleanToVisibilityConverter : IValueConverter
         {
             public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
             {
@@ -243,4 +245,5 @@ namespace driventasks
                 return value is Visibility && (Visibility)value == Visibility.Visible;
             }
         }
+    }
 }
