@@ -7,6 +7,8 @@ namespace driventasks.DesignViewModels
     {
         public TaskGroupViewModel()
         {
+            PrimaryTaskItemViewModel = new TaskItemViewModel("new titile primary ", new Random().Next(0, 1) == 0 ? "" : "new primary description item longer description text yeaaa buddy");
+            TaskItemViewModels = new ObservableCollection<TaskItemViewModel>();
             LoadData();
         }
 
@@ -15,7 +17,6 @@ namespace driventasks.DesignViewModels
 
         public void LoadData()
         {
-            PrimaryTaskItemViewModel = new TaskItemViewModel("lfajdkfla;", "sldfjkadlf");
             int count = new Random().Next(0, 5);
             for (int i = 0; i < count; i++)
             {
