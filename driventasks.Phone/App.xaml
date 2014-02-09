@@ -10,6 +10,70 @@
     <Application.Resources>
         <!--<local:LocalizedStrings xmlns:local="clr-namespace:driventasks" x:Key="LocalizedStrings"/>-->
         <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        
+        <Color x:Key="StartTaskColor">#88c</Color>
+        <Color x:Key="CompleteTaskColor">#8c8</Color>
+        <Color x:Key="DeleteTaskColor">#c88</Color>
+        <Color x:Key="Bright">#eee</Color>
+        
+        <SolidColorBrush x:Key="StartTaskColorBrush" Color="{StaticResource StartTaskColor}" />
+        <SolidColorBrush x:Key="CompleteTaskColorBrush" Color="{StaticResource CompleteTaskColor}" />
+        <SolidColorBrush x:Key="DeleteTaskColorBrush" Color="{StaticResource DeleteTaskColor}" />
+        
+        <Style x:Key="SmallText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontStyle" Value="Italic" />
+        </Style>
+        
+        <Style x:Key="MediumSmallText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        
+        <Style x:Key="MediumText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMedium}" />
+            <Setter Property="TextTrimming" Value="WordEllipsis" />
+        </Style>
+        
+        <Style x:Key="LargeText" TargetType="TextBlock">
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="FontSize" Value="{StaticResource PhoneFontSizeLarge}" />
+        </Style>
+        
+        <Style x:Key="SmallButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="ContentContainerColor" Storyboard.TargetProperty="Color" To="{StaticResource Bright}" Duration="0:0:0.300" AutoReverse="True" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetName="ContentContainerColor" Storyboard.TargetProperty="Color" To="{StaticResource PhoneDisabledColor}" Duration="0:0:0.300" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border BorderBrush="{TemplateBinding Background}" BorderThickness="2" Margin="2" Height="30">
+                                <Border.Background>
+                                    <SolidColorBrush x:Name="ContentContainerColor" />
+                                </Border.Background>
+                                <TextBlock Style="{StaticResource SmallText}" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" TextWrapping="Wrap" />
+                            </Border>
+                        </ContentPresenter>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
@@ -18,5 +82,4 @@
             Launching="Application_Launching" Closing="Application_Closing"
             Activated="Application_Activated" Deactivated="Application_Deactivated"/>
     </Application.ApplicationLifetimeObjects>
-
 </Application>
