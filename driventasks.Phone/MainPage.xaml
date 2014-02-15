@@ -49,47 +49,12 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector ItemsSource="{Binding TaskGroups}">
+            <phone:LongListSelector ItemsSource="{Binding TaskItems}">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <toolkit:ExpanderView Header="{Binding PrimaryTaskItemViewModel}" Expander="{Binding PrimaryTaskItemViewModel}" NonExpandableHeader="{Binding PrimaryTaskItemViewModel}" ItemsSource="{Binding TaskItemsViewModel}" IsExpanded="{Binding IsExpanded}" IsNonExpandable="True">
-                                <toolkit:ExpanderView.HeaderTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Title}" Style="{StaticResource MediumText}" Width="274" />
-                                            </StackPanel>
-                                            <Button Content="start" Command="{Binding StartTaskCommand}" Style="{StaticResource SmallButtonStyle}" Background="{StaticResource StartTaskColorBrush}" />
-                                            <Button Content="finish" Command="{Binding CompleteTaskCommand}" Style="{StaticResource SmallButtonStyle}" Background="{StaticResource CompleteTaskColorBrush}" />
-                                            <Button Content="delete" Command="{Binding DeleteTaskCommand}" Style="{StaticResource SmallButtonStyle}" Background="{StaticResource DeleteTaskColorBrush}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </toolkit:ExpanderView.HeaderTemplate>
-                                <toolkit:ExpanderView.ExpanderTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Description}" Style="{StaticResource MediumSmallText}" TextTrimming="WordEllipsis" Width="388" />
-                                    </DataTemplate>
-                                </toolkit:ExpanderView.ExpanderTemplate>
-                                <toolkit:ExpanderView.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Title}" />
-                                    </DataTemplate>
-                                </toolkit:ExpanderView.ItemTemplate>
-                                <toolkit:ExpanderView.NonExpandableHeaderTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding Title}" Style="{StaticResource MediumText}" HorizontalAlignment="Left" Width="274" />
-                                                <TextBlock Text="{Binding Description}" Style="{StaticResource MediumSmallText}" TextTrimming="WordEllipsis" Width="274" />
-                                            </StackPanel>
-                                            <Button Content="start" Command="{Binding StartTaskCommand}" Style="{StaticResource SmallButtonStyle}" Background="{StaticResource StartTaskColorBrush}" />
-                                            <Button Content="finish" Command="{Binding CompleteTaskCommand}" Style="{StaticResource SmallButtonStyle}" Background="{StaticResource CompleteTaskColorBrush}" />
-                                            <Button Content="delete" Command="{Binding DeleteTaskCommand}" Style="{StaticResource SmallButtonStyle}" Background="{StaticResource DeleteTaskColorBrush}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </toolkit:ExpanderView.NonExpandableHeaderTemplate>
-                            </toolkit:ExpanderView>
+                        <StackPanel Margin="0,0,0,4" Width="420">
+                            <StackPanel Orientation="Horizontal">
+                                    <StackPanel>                                        <TextBlock Text="{Binding Title}" Style="{StaticResource LargeText}" />                                    </StackPanel>                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>

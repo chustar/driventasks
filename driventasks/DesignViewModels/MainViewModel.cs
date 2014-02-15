@@ -6,7 +6,7 @@ namespace driventasks.DesignViewModels
     {
         public MainViewModel()
         {
-            TaskGroups = new ObservableCollection<TaskGroupViewModel>();
+            TaskItems = new ObservableCollection<TaskItemViewModel>();
             LoadData();
         }
 
@@ -15,19 +15,20 @@ namespace driventasks.DesignViewModels
         public bool IsAddingNewTask { get; set; }
 
         public string NewTaskTitle { get; set; }
+
         public string NewTaskDescription { get; set; }
 
         public int NewTaskRating { get; set; }
 
-        public ObservableCollection<TaskGroupViewModel> TaskGroups { get; set; }
+        public ObservableCollection<TaskItemViewModel> TaskItems { get; set; }
        
         public void LoadData()
         {
-            TaskGroups.Add(new TaskGroupViewModel());
-            TaskGroups.Add(new TaskGroupViewModel());
-            TaskGroups.Add(new TaskGroupViewModel());
-            TaskGroups.Add(new TaskGroupViewModel());
-            TaskGroups.Add(new TaskGroupViewModel());
+            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
+            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
+            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
+            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
+            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
         }
     }
 }

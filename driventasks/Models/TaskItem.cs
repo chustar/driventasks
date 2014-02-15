@@ -17,7 +17,7 @@ namespace driventasks.Models
             Ratings = new ObservableCollection<Rating>();
             Ratings.Add(rating);
             DateCreated = DateTime.UtcNow;
-            tasksTable.InsertAsync(this);
+            taskItemsTable.InsertAsync(this);
         }
 
         [JsonProperty(PropertyName = "title")] 
@@ -71,13 +71,13 @@ namespace driventasks.Models
         public async Task Update()
         {
             DateModified = DateTime.UtcNow;
-            await tasksTable.UpdateAsync(this);
+            await taskItemsTable.UpdateAsync(this);
         }
        
         public async Task Start()
         {
             DateStarted = DateTime.UtcNow;
-            await tasksTable.UpdateAsync(this);
+            await taskItemsTable.UpdateAsync(this);
         }
         
         public async Task Complete()
@@ -98,6 +98,18 @@ namespace driventasks.Models
             await Update();
         }
 
-        private IMobileServiceTable<TaskItem> tasksTable = DataStorage.DrivenTasks.GetTable<TaskItem>();
+        public static async Task<ObservableCollection<TaskItem>> FetchAll(int page)
+        {
+            return await taskItemsTable
+                 .Where(taskItem => taskItem.Deleted == null
+                     && taskItem.Completed == null)
+                     .Skip(page * pageSize)
+                     .Take(pageSize)
+                 .ToCollectionAsync(20);
+        }
+
+        private static int pageSize = 20;
+
+        private static IMobileServiceTable<TaskItem> taskItemsTable = DataStorage.DrivenTasks.GetTable<TaskItem>();
     }
 }

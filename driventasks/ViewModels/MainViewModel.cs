@@ -15,7 +15,7 @@ namespace driventasks.ViewModels
     {
         public MainViewModel()
         {
-            TaskGroups = new ObservableCollection<TaskGroupViewModel>();
+            TaskItems = new ObservableCollection<TaskItemViewModel>();
         }
 
         private bool _isLoadingData = false;
@@ -51,7 +51,7 @@ namespace driventasks.ViewModels
 
         public int NewTaskRating { get; set; }
 
-        public ObservableCollection<TaskGroupViewModel> TaskGroups { get; set; }
+        public ObservableCollection<TaskItemViewModel> TaskItems { get; set; }
        
         private SimpleCommand _refreshCommand;
         public SimpleCommand RefreshCommand
@@ -76,7 +76,7 @@ namespace driventasks.ViewModels
             {
                 if (_toggleAddNewTaskCommand == null)
                 {
-                    _toggleAddNewTaskCommand = new SimpleCommand(async parameter =>
+                    _toggleAddNewTaskCommand = new SimpleCommand(parameter =>
                     {
                         IsAddingNewTask = true;
                     });
@@ -96,7 +96,7 @@ namespace driventasks.ViewModels
                     {
                         if (!NewTaskTitle.Equals(""))
                         {
-                            TaskGroups.Add(new TaskGroupViewModel(new TaskGroup(new TaskItem(NewTaskTitle, NewTaskDescription, new Rating(NewTaskRating)))));
+                            TaskItems.Add(new TaskItemViewModel(new TaskItem(NewTaskTitle, NewTaskDescription, new Rating(NewTaskRating))));
                         }
                     });
                 }
@@ -107,9 +107,9 @@ namespace driventasks.ViewModels
         public async Task LoadData(int page = 0)
         {
             IsLoadingData = true;
-            foreach (var taskGroup in await TaskGroup.FetchAll(page))
+            foreach (var taskItem in await TaskItem.FetchAll(page))
             {
-                TaskGroups.Add(new TaskGroupViewModel(taskGroup));
+                TaskItems.Add(new TaskItemViewModel(taskItem));
             }
 
             IsLoadingData = false;
