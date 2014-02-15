@@ -52,11 +52,7 @@
             <phone:LongListSelector ItemsSource="{Binding TaskItems}">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="0,0,0,4" Width="420">
-                            <StackPanel Orientation="Horizontal">
-                                    <StackPanel>                                        <TextBlock Text="{Binding Title}" Style="{StaticResource LargeText}" />                                    </StackPanel>                            </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
+                        <TextBlock Margin="12,0,0,12" Text="{Binding Title}" Style="{StaticResource LargeText}" />                    </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
             </phone:LongListSelector>
             <StackPanel>
