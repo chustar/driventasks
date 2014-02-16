@@ -10,6 +10,7 @@ using driventasks.Resources;
 
 using driventasks.ViewModels;
 using System.Windows.Data;
+using System.Windows.Controls;
 
 namespace driventasks
 {
@@ -229,10 +230,6 @@ namespace driventasks
 
     namespace Converters
     {
-        /// <summary>
-        /// Value converter that translates true to <see cref="Visibility.Visible"/> and false to
-        /// <see cref="Visibility.Collapsed"/>.
-        /// </summary>
         public class BooleanToVisibilityConverter : IValueConverter
         {
             public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

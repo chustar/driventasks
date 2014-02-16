@@ -24,6 +24,13 @@ namespace driventasks
             //BuildLocalizedApplicationBar();
         }
 
+        private void LongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItem = (sender as LongListSelector).SelectedItem as TaskItemViewModel;
+            NavigationService.Navigate(new System.Uri(string.Format("/Views/TaskItem.xaml?taskItemId={0}", selectedItem), System.UriKind.Relative));
+            (sender as LongListSelector).SelectedItem = null;
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{

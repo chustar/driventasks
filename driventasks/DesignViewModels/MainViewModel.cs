@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using DesignTimeBuddy;
 
 namespace driventasks.DesignViewModels
 {
@@ -12,23 +13,16 @@ namespace driventasks.DesignViewModels
 
         public bool IsLoadingData { get; set; }
 
-        public bool IsAddingNewTask { get; set; }
-
-        public string NewTaskTitle { get; set; }
-
-        public string NewTaskDescription { get; set; }
-
-        public int NewTaskRating { get; set; }
-
         public ObservableCollection<TaskItemViewModel> TaskItems { get; set; }
        
         public void LoadData()
         {
-            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
-            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
-            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
-            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
-            TaskItems.Add(new TaskItemViewModel("fdk", "kdlad"));
+            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
+            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
+            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
+            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
+            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
+            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
         }
     }
 }

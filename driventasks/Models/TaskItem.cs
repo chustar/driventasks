@@ -20,6 +20,8 @@ namespace driventasks.Models
             taskItemsTable.InsertAsync(this);
         }
 
+        public string Id { get; set; }
+
         [JsonProperty(PropertyName = "title")] 
         public string Title { get; set; }
 

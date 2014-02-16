@@ -1,6 +1,8 @@
-﻿using driventasks.Utilities;
+﻿using driventasks.Models;
+using driventasks.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +11,31 @@ namespace driventasks.ViewModels
 {
     public class TaskItemViewModel
     {
-        private Models.TaskItem taskItem;
+        private TaskItem taskItem;
 
-        public TaskItemViewModel(Models.TaskItem taskItem)
+        public TaskItemViewModel(TaskItem taskItem)
         {
             this.taskItem = taskItem;
+
+            Title = taskItem.Title;
+            Description = taskItem.Description;
         }
 
+        #region Reflected Properties
+        public readonly string Id
+        {
+            get { return taskItem.Id; }
+        }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        #endregion
+
+        public ObservableCollection<Rating> Ratings
+        {
+            get { return taskItem.Ratings; }
+        }
+
+        #region TaskItemViewModel Commands
         private SimpleCommand _updateTaskItemCommand;
         public SimpleCommand UpdateTaskItemCommand
         {
@@ -87,7 +107,7 @@ namespace driventasks.ViewModels
                 }
                 return _rateTaskCommand;
             }
-
+        #endregion
         }
     }
 }

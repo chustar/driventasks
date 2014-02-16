@@ -8,6 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:design="clr-namespace:driventasks.DesignViewModels;assembly=driventasks"
+    xmlns:px="clr-namespace:PixelLab"
     mc:Ignorable="d"
     d:DataContext="{Binding Source={d:DesignInstance Type=design:MainViewModel, IsDesignTimeCreatable=True}}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -43,25 +44,25 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="DRIVEN TASKS" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+        <StackPanel x:Name="TitlePanel" 
+                    Grid.Row="0" 
+                    Margin="12,17,0,28">
+            <TextBlock Text="DRIVEN TASKS" 
+                       Style="{StaticResource PhoneTextNormalStyle}" 
+                       Margin="12,0"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector ItemsSource="{Binding TaskItems}">
+        <Grid x:Name="ContentPanel" 
+              Grid.Row="1" 
+              Margin="12,0,12,0">
+            <phone:LongListSelector ItemsSource="{Binding TaskItems}"
+                                    SelectionChanged="LongListSelector_SelectionChanged">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Margin="12,0,0,12" Text="{Binding Title}" Style="{StaticResource LargeText}" />                    </DataTemplate>
+                        <TextBlock x:Name="TaskItemName" Text="{Binding Title}"                             Style="{StaticResource LargeText}"                             Margin="12,0,0,12"                             toolkit:TiltEffect.IsTiltEnabled="True" />                    </DataTemplate>
                 </phone:LongListSelector.ItemTemplate>
             </phone:LongListSelector>
-            <StackPanel>
-                <StackPanel Visibility="{Binding IsAddingNewTask, Converter={StaticResource VisibilityConverter}}">
-                    <TextBox Text="{Binding NewTaskTitle}" />
-                    <TextBox Text="{Binding NewTaskDescription}" />
-                    <Button Content="save task" Command="{Binding AddNewTaskCommand}" />
-                </StackPanel>
-            </StackPanel>
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

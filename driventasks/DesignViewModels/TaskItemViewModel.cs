@@ -15,16 +15,20 @@ namespace driventasks.DesignViewModels
 
         public void LoadData()
         {
-            int count = new Random().Next(1, 5);
+            int count = randomizer.Next(1, 5);
             for (int i = 0; i < count; i++)
             {
-                Ratings.Add(new Rating(new Random().Next(-2,2)));
+                Ratings.Add(new Rating(randomizer.Next(-2,2)));
             }
         }
 
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
         public ObservableCollection<Rating> Ratings { get; set; }
+    
+        private Random randomizer;
     }
 
     public class Rating
@@ -38,4 +42,5 @@ namespace driventasks.DesignViewModels
 
         public DateTime DateCreated { get; set; }
     }
+
 }
