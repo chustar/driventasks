@@ -12,6 +12,13 @@ namespace driventasks.ViewModels
     public class TaskItemViewModel
     {
         private TaskItem taskItem;
+        public TaskItemViewModel(string id)
+        {
+            this.taskItem = TaskItem.FetchById(id).Result;
+
+            Title = taskItem.Title;
+            Description = taskItem.Description;
+        }
 
         public TaskItemViewModel(TaskItem taskItem)
         {

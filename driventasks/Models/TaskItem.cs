@@ -99,6 +99,14 @@ namespace driventasks.Models
             Ratings.Add(new Rating(rating));
             await Update();
         }
+        
+        public static async Task<TaskItem> FetchById(string id)
+        {
+            return (await taskItemsTable
+                .Where(taskItem => taskItem.Id == id)
+                .Take(1)
+                .ToListAsync()).First();
+        }
 
         public static async Task<ObservableCollection<TaskItem>> FetchAll(int page)
         {
@@ -113,5 +121,6 @@ namespace driventasks.Models
         private static int pageSize = 20;
 
         private static IMobileServiceTable<TaskItem> taskItemsTable = DataStorage.DrivenTasks.GetTable<TaskItem>();
+
     }
 }
