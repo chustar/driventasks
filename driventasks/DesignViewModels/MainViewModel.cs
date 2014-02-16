@@ -17,12 +17,12 @@ namespace driventasks.DesignViewModels
        
         public void LoadData()
         {
-            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
-            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
-            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
-            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
-            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
-            TaskItems.Add(new TaskItemViewModel(DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3), DeisgnTimeBuddy.GetSimpleString()));
+            TaskItems.Add(new TaskItemViewModel());
+            TaskItems.Add(new TaskItemViewModel());
+            TaskItems.Add(new TaskItemViewModel());
+            TaskItems.Add(new TaskItemViewModel());
+            TaskItems.Add(new TaskItemViewModel());
+            TaskItems.Add(new TaskItemViewModel());
         }
     }
 }

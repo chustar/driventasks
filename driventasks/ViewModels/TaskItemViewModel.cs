@@ -9,15 +9,11 @@ using System.Threading.Tasks;
 
 namespace driventasks.ViewModels
 {
-    public class TaskItemViewModel
+    public class TaskItemViewModel : BindableBase
     {
         private TaskItem taskItem;
-        public TaskItemViewModel(string id)
+        public TaskItemViewModel()
         {
-            this.taskItem = TaskItem.FetchById(id).Result;
-
-            Title = taskItem.Title;
-            Description = taskItem.Description;
         }
 
         public TaskItemViewModel(TaskItem taskItem)
@@ -29,17 +25,50 @@ namespace driventasks.ViewModels
         }
 
         #region Reflected Properties
-        public readonly string Id
+        public string Id
         {
             get { return taskItem.Id; }
         }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        #endregion
+
+        private string _title;
+        public string Title
+        {
+            get
+            {
+                return _title;
+            }
+            set
+            {
+                _title = value;
+                NotifyPropertyChanged("_title");
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                NotifyPropertyChanged("_description");
+            }
+        }
 
         public ObservableCollection<Rating> Ratings
         {
-            get { return taskItem.Ratings; }
+            get { return taskItem == null ? new ObservableCollection<Rating>() : taskItem.Ratings; }
+        }
+        #endregion
+
+        public async Task LoadData(string id)
+        {
+            this.taskItem = await TaskItem.FetchById(id);
+            Title = taskItem.Title;
+            Description = taskItem.Description;
         }
 
         #region TaskItemViewModel Commands

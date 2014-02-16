@@ -18,15 +18,16 @@ namespace driventasks.Views
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Completes user authentication if it had been started.
-        /// </summary>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             string taskItemId = "";
             if (NavigationContext.QueryString.TryGetValue("taskItemId", out taskItemId))
             {
-                DataContext = new TaskItemViewModel(taskItemId);
+                var taskItemViewModel = new TaskItemViewModel();
+                var task = taskItemViewModel.LoadData(taskItemId);
+                await task;
+
+                DataContext = taskItemViewModel;
             }
             else
             {

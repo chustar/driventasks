@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 
+using DesignTimeBuddy;
+
 namespace driventasks.DesignViewModels
 {
     public class TaskItemViewModel
     {
-        public TaskItemViewModel(string title, string description)
+        public TaskItemViewModel()
         {
-            Title = title;
-            Description = description;
+            Title = DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString(3);
+            Description = DesignTimeBuddy.DeisgnTimeBuddy.GetSimpleString();
             Ratings = new ObservableCollection<Rating>();
             LoadData();
         }
 
         public void LoadData()
         {
-            int count = randomizer.Next(1, 5);
+            int count = randomizer.Next(0, 5);
             for (int i = 0; i < count; i++)
             {
                 Ratings.Add(new Rating(randomizer.Next(-2,2)));
@@ -27,8 +29,8 @@ namespace driventasks.DesignViewModels
         public string Description { get; set; }
 
         public ObservableCollection<Rating> Ratings { get; set; }
-    
-        private Random randomizer;
+
+        private static Random randomizer = new Random();
     }
 
     public class Rating
