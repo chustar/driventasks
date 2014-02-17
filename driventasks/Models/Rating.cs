@@ -37,14 +37,26 @@ namespace driventasks.Models
             }
         }
 
+        [JsonProperty(PropertyName = "description")] 
+        public string Description { get; set; }
+
+
         [JsonProperty(PropertyName = "created")]
         public DateTime DateCreated {get; set; }
+        
+        public static async Task<Rating> FetchById(string id)
+        {
+            return (await ratingsTable
+                .Where(rating => rating.Id == id)
+                .Take(1)
+                .ToListAsync()).First();
+        }
 
         public async Task Update()
         {
             await ratingsTable.UpdateAsync(this);
         }
         
-        private IMobileServiceTable<Rating> ratingsTable = DataStorage.DrivenTasks.GetTable<Rating>();
+        private static IMobileServiceTable<Rating> ratingsTable = DataStorage.DrivenTasks.GetTable<Rating>();
     }
 }

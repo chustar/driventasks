@@ -27,6 +27,13 @@
                                Style="{StaticResource MediumText}"
                                TextWrapping="Wrap"
                                Margin="12,0,0,12" />
+
+                    <StackPanel Margin="0, 32">
+                        <TextBlock Text="rate this task" Style="{StaticResource PhoneTextGroupHeaderStyle}" />
+                        <Slider Grid.Column="1" Minimum="-2" Maximum="2" Value="{Binding NewRating}" Margin="0,10,0,-12" />
+                        <toolkit:PhoneTextBox Text="{Binding NewRatingDescription}" Hint="how does that make you feel?" />
+                        <Button Content="save rating" Command="{Binding SaveRatingCommand}" Margin="0,24,0,0" />
+                    </StackPanel>
                 </StackPanel>
             </phone:PivotItem>
 
@@ -35,5 +42,5 @@
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>
-    
+
 </phone:PhoneApplicationPage>

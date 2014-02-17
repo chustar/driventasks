@@ -14,7 +14,8 @@ namespace driventasks.Models
     {
         public TaskItem(string title, string description, Rating rating)
         {
-            Ratings = new ObservableCollection<Rating>();
+            Ratings = new List<Rating>();
+
             Ratings.Add(rating);
             DateCreated = DateTime.UtcNow;
             taskItemsTable.InsertAsync(this);
@@ -44,7 +45,7 @@ namespace driventasks.Models
         public DateTime DateDeleted { get; set; }
 
         [JsonProperty(PropertyName = "ratings", ItemIsReference = true)] 
-        public ObservableCollection<Rating> Ratings { get; set; }
+        public List<Rating> Ratings { get; set; }
 
         public bool Started
         {
@@ -121,6 +122,5 @@ namespace driventasks.Models
         private static int pageSize = 20;
 
         private static IMobileServiceTable<TaskItem> taskItemsTable = DataStorage.DrivenTasks.GetTable<TaskItem>();
-
     }
 }

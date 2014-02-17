@@ -12,8 +12,11 @@ namespace driventasks.ViewModels
     public class TaskItemViewModel : BindableBase
     {
         private TaskItem taskItem;
+
+        #region Constructors
         public TaskItemViewModel()
         {
+            Ratings = new ObservableCollection<RatingViewModel>();
         }
 
         public TaskItemViewModel(TaskItem taskItem)
@@ -22,9 +25,11 @@ namespace driventasks.ViewModels
 
             Title = taskItem.Title;
             Description = taskItem.Description;
+            Ratings = new ObservableCollection<RatingViewModel>();
         }
+        #endregion
 
-        #region Reflected Properties
+        #region Properties
         public string Id
         {
             get { return taskItem.Id; }
@@ -58,10 +63,9 @@ namespace driventasks.ViewModels
             }
         }
 
-        public ObservableCollection<Rating> Ratings
-        {
-            get { return taskItem == null ? new ObservableCollection<Rating>() : taskItem.Ratings; }
-        }
+        public ObservableCollection<RatingViewModel> Ratings { get; private set; }
+
+        public RatingViewModel NewRating { get; set; }
         #endregion
 
         public async Task LoadData(string id)
@@ -72,6 +76,34 @@ namespace driventasks.ViewModels
         }
 
         #region TaskItemViewModel Commands
+        private SimpleCommand _addRatingItemCommand;
+        public SimpleCommand AddRatingItemCommand
+        {
+            get
+            {
+                if (_addRatingItemCommand == null)
+                    _addRatingItemCommand = new SimpleCommand(async property =>
+                {
+                    //addRating
+                });
+                return _addRatingItemCommand;
+            }
+        }
+
+        private SimpleCommand _addTaskItemCommand;
+        public SimpleCommand AddTaskItemCommand
+        {
+            get
+            {
+                if (_addTaskItemCommand == null)
+                    _addTaskItemCommand = new SimpleCommand(async property =>
+                {
+                    //addTask
+                });
+                return _addTaskItemCommand;
+            }
+        }
+
         private SimpleCommand _updateTaskItemCommand;
         public SimpleCommand UpdateTaskItemCommand
         {
@@ -143,7 +175,15 @@ namespace driventasks.ViewModels
                 }
                 return _rateTaskCommand;
             }
+        }
         #endregion
+
+        public void LoadData()
+        {
+            foreach (var rating in taskItem.Ratings)
+            {
+                Ratings.Add(new RatingViewModel(rating));
+            }
         }
     }
 }
