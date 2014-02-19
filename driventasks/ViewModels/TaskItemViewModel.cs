@@ -30,6 +30,7 @@ namespace driventasks.ViewModels
         #endregion
 
         #region Properties
+
         public string Id
         {
             get { return taskItem.Id; }
@@ -68,39 +69,21 @@ namespace driventasks.ViewModels
         public RatingViewModel NewRating { get; set; }
         #endregion
 
-        public async Task LoadData(string id)
-        {
-            this.taskItem = await TaskItem.FetchById(id);
-            Title = taskItem.Title;
-            Description = taskItem.Description;
-        }
-
         #region TaskItemViewModel Commands
-        private SimpleCommand _addRatingItemCommand;
-        public SimpleCommand AddRatingItemCommand
+        private SimpleCommand _addRatingCommand;
+        public SimpleCommand AddRatingCommand
         {
             get
             {
-                if (_addRatingItemCommand == null)
-                    _addRatingItemCommand = new SimpleCommand(async property =>
+                if (_addRatingCommand == null)
+                    _addRatingCommand = new SimpleCommand(async property =>
                 {
-                    //addRating
+                    await NewRating.SaveData();
+                    taskItem.Ratings.Add(NewRating.rating);
+                    await TaskItem.Update(taskItem);
+                    Ratings.Add(NewRating);
                 });
-                return _addRatingItemCommand;
-            }
-        }
-
-        private SimpleCommand _addTaskItemCommand;
-        public SimpleCommand AddTaskItemCommand
-        {
-            get
-            {
-                if (_addTaskItemCommand == null)
-                    _addTaskItemCommand = new SimpleCommand(async property =>
-                {
-                    //addTask
-                });
-                return _addTaskItemCommand;
+                return _addRatingCommand;
             }
         }
 
@@ -145,44 +128,44 @@ namespace driventasks.ViewModels
                 return _completeTaskItemCommand;
             }
         }
-
-        private SimpleCommand _deleteTaskItemCommand;
-        public SimpleCommand DeleteTaskItemCommand
-        {
-            get
-            {
-                if (_deleteTaskItemCommand == null)
-                    _deleteTaskItemCommand = new SimpleCommand(async property =>
-                {
-                    await taskItem.Delete();
-                });
-                return _deleteTaskItemCommand;
-            }
-        }
-
-        private SimpleCommand _rateTaskCommand;
-        public SimpleCommand RateTaskCommand
-        {
-            get
-            {
-                if (_rateTaskCommand == null)
-                {
-                    _rateTaskCommand = new SimpleCommand(async parameter =>
-                    {
-                        int rating = (parameter as int?).Value;
-                        await taskItem.AddRating(rating);
-                    });
-                }
-                return _rateTaskCommand;
-            }
-        }
         #endregion
-
-        public void LoadData()
+        
+        public async Task LoadData(string id)
         {
+            if (taskItem == null)
+            {
+                this.taskItem = await TaskItem.FetchById(id);
+            }
+
+            Title = taskItem.Title;
+            Description = taskItem.Description;
+            
             foreach (var rating in taskItem.Ratings)
             {
                 Ratings.Add(new RatingViewModel(rating));
+            }
+        }
+
+        public async Task SaveData()
+        {
+            if (taskItem == null)
+            {
+                taskItem = new TaskItem(Title, Description, new Rating(0));
+                await TaskItem.Create(taskItem);
+            }
+            else
+            {
+                taskItem.Title = Title;
+                taskItem.Description = Description;
+                await taskItem.Update();
+            }
+        }
+
+        public async Task DeleteData()
+        {
+            if (taskItem != null)
+            {
+                await taskItem.Delete();
             }
         }
     }

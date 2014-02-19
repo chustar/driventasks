@@ -11,7 +11,7 @@ namespace driventasks.ViewModels
 {
     public class RatingViewModel : BindableBase
     {
-        private Rating rating;
+        public Rating rating;
 
         #region Constructors
         public RatingViewModel()
@@ -21,8 +21,6 @@ namespace driventasks.ViewModels
         public RatingViewModel(Rating rating)
         {
             this.rating = rating;
-
-            LoadData();
         }
         #endregion
 
@@ -32,7 +30,19 @@ namespace driventasks.ViewModels
             get { return rating.Id; }
         }
 
-        public int RatingValue { get; set; }
+        private int _ratingValue;
+        public int RatingValue
+        {
+            get
+            {
+                return _ratingValue;
+            }
+            set
+            {
+                _ratingValue = value;
+                NotifyPropertyChanged("RatingValue");
+            }
+        }
 
         private string _description;
         public string Description
@@ -44,16 +54,10 @@ namespace driventasks.ViewModels
             set
             {
                 _description = value;
-                NotifyPropertyChanged("_description");
+                NotifyPropertyChanged("Description");
             }
         }
         #endregion
-
-        public void LoadData()
-        {
-            RatingValue = rating.RatingValue;
-            Description = rating.Description;
-        }
 
         public async Task LoadData(string id)
         {
@@ -62,7 +66,21 @@ namespace driventasks.ViewModels
                 this.rating = await Rating.FetchById(id);
             }
 
-            LoadData();
+            RatingValue = rating.RatingValue;
+            Description = rating.Description;
+        }
+
+        public async Task SaveData()
+        {
+            if (rating == null)
+            {
+                rating = new Rating(RatingValue, Description);
+                await Rating.Create(rating);
+            }
+            else
+            {
+                await Rating.Update(rating);
+            }
         }
     }
 }

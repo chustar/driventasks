@@ -15,10 +15,8 @@ namespace driventasks.Models
         public TaskItem(string title, string description, Rating rating)
         {
             Ratings = new List<Rating>();
-
             Ratings.Add(rating);
             DateCreated = DateTime.UtcNow;
-            taskItemsTable.InsertAsync(this);
         }
 
         public string Id { get; set; }
@@ -100,7 +98,12 @@ namespace driventasks.Models
             Ratings.Add(new Rating(rating));
             await Update();
         }
-        
+
+        public static async Task Create(TaskItem taskItem)
+        {
+            await taskItemsTable.InsertAsync(taskItem);
+        }
+
         public static async Task<TaskItem> FetchById(string id)
         {
             return (await taskItemsTable
@@ -118,6 +121,17 @@ namespace driventasks.Models
                      .Take(pageSize)
                  .ToCollectionAsync(20);
         }
+        
+        public static async Task Update(TaskItem taskItem)
+        {
+            await taskItemsTable.UpdateAsync(taskItem);
+        }
+
+        public static async Task Delete(TaskItem taskItem)
+        {
+            await taskItem.Delete(); 
+        }
+
 
         private static int pageSize = 20;
 

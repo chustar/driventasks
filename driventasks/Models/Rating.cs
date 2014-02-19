@@ -11,10 +11,10 @@ namespace driventasks.Models
 {
     public class Rating
     {
-        public Rating(int rating = 0)
+        public Rating(int rating = 0, string description  = "")
         {
             RatingValue = rating;
-            ratingsTable.InsertAsync(this);
+            Description = description;
         }
 
         public string Id { get; set; }
@@ -43,6 +43,11 @@ namespace driventasks.Models
 
         [JsonProperty(PropertyName = "created")]
         public DateTime DateCreated {get; set; }
+
+        public static async Task Create(Rating rating)
+        {
+            await ratingsTable.InsertAsync(rating);
+        }
         
         public static async Task<Rating> FetchById(string id)
         {
@@ -52,9 +57,9 @@ namespace driventasks.Models
                 .ToListAsync()).First();
         }
 
-        public async Task Update()
+        public static async Task Update(Rating rating)
         {
-            await ratingsTable.UpdateAsync(this);
+            await ratingsTable.UpdateAsync(rating);
         }
         
         private static IMobileServiceTable<Rating> ratingsTable = DataStorage.DrivenTasks.GetTable<Rating>();

@@ -32,24 +32,7 @@ namespace driventasks.ViewModels
             }
         }
 
-        private bool _isAddingNewTask = false;
-        public bool IsAddingNewTask
-        {
-            get
-            {
-                return _isAddingNewTask;
-            }
-            set
-            {
-                _isAddingNewTask = value;
-                NotifyPropertyChanged("IsAddingNewTask");
-            }
-        }
-
-        public string NewTaskTitle { get; set; }
-        public string NewTaskDescription { get; set; }
-
-        public int NewTaskRating { get; set; }
+        public TaskItemViewModel NewTaskItem { get; set; }
 
         public ObservableCollection<TaskItemViewModel> TaskItems { get; set; }
        
@@ -85,31 +68,44 @@ namespace driventasks.ViewModels
             }
         }
         
-        private SimpleCommand _addNewTaskCommand;
-        public SimpleCommand AddNewTaskCommand
+        private SimpleCommand _addTaskItemCommand;
+        public SimpleCommand AddTaskItemCommand
         {
             get
             {
-                if (_addNewTaskCommand == null)
+                if (_addTaskItemCommand == null)
+                    _addTaskItemCommand = new SimpleCommand(async property =>
                 {
-                    _addNewTaskCommand = new SimpleCommand(parameter =>
-                    {
-                        if (!NewTaskTitle.Equals(""))
-                        {
-                            TaskItems.Add(new TaskItemViewModel(new TaskItem(NewTaskTitle, NewTaskDescription, new Rating(NewTaskRating))));
-                        }
-                    });
-                }
-                return _addNewTaskCommand;
+                    await NewTaskItem.SaveData();
+                    NewTaskItem.AddRatingCommand.Execute(null);
+                });
+                return _addTaskItemCommand;
             }
         }
-    
+
+        private SimpleCommand _deleteTaskItemCommand;
+        public SimpleCommand DeleteTaskItemCommand
+        {
+            get
+            {
+                if (_deleteTaskItemCommand == null)
+                    _deleteTaskItemCommand = new SimpleCommand(async property =>
+                {
+                    var taskItem = property as TaskItemViewModel;
+                    await taskItem.DeleteData();
+                    TaskItems.Remove(taskItem);
+                });
+                return _deleteTaskItemCommand;
+            }
+        }
+
         public async Task LoadData(int page = 0)
         {
             IsLoadingData = true;
             foreach (var taskItem in await TaskItem.FetchAll(page))
             {
-                TaskItems.Add(new TaskItemViewModel(taskItem));
+                var taskItemViewModel = new TaskItemViewModel(taskItem);
+                TaskItems.Add(taskItemViewModel);
             }
 
             IsLoadingData = false;
