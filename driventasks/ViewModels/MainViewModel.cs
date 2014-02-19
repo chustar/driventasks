@@ -51,22 +51,6 @@ namespace driventasks.ViewModels
                 return _refreshCommand;
             }
         }
-
-        private SimpleCommand _toggleAddNewTaskCommand;
-        public SimpleCommand ToggleAddNewTaskCommand
-        {
-            get
-            {
-                if (_toggleAddNewTaskCommand == null)
-                {
-                    _toggleAddNewTaskCommand = new SimpleCommand(parameter =>
-                    {
-                        IsAddingNewTask = true;
-                    });
-                }
-                return _toggleAddNewTaskCommand;
-            }
-        }
         
         private SimpleCommand _addTaskItemCommand;
         public SimpleCommand AddTaskItemCommand
